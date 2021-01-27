@@ -14,12 +14,22 @@
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" Grid.Column="0">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <DockPanel Grid.Row="0" Grid.Column="0">
+            <TextBox DockPanel.Dock="Top" IsReadOnly="True" Text="{Binding CurrentDirectory}"></TextBox>
+            <ListView
+                ItemsSource="{Binding Files}"
+                >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">
+                            <GridViewColumn.Header>Имя</GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Size}">
+                            <GridViewColumn.Header>Размер</GridViewColumn.Header>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
     </Grid>
 </Window>

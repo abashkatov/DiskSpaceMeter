@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.IO;
+using DiskSpaceMeter.Model.Navigator.Dto;
+using System.Collections.ObjectModel;
 
 namespace DiskSpaceMeter.View
 {
@@ -17,6 +20,18 @@ namespace DiskSpaceMeter.View
         {
             InitializeComponent();
             DataContext = context;
+
+            string CurrentDirectory = Directory.GetCurrentDirectory();
+            ObservableCollection<FileDto> files = new ObservableCollection<FileDto>();
+
+            string[] items = Directory.GetFileSystemEntries(CurrentDirectory);
+            foreach (string item in items) {
+                files.Add(new FileDto(item));
+            }
+            //FileInfo fileInfo = new FileInfo(CurrentDirectory);
+            files.Add(new FileDto(CurrentDirectory, ".."));
+
+            context.Files = files;
         }
     }
 }
