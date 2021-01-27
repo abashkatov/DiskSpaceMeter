@@ -1,11 +1,7 @@
 ﻿using DiskSpaceMeter.View;
 using DiskSpaceMeter.ViewModel;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace DiskSpaceMeter
@@ -17,8 +13,14 @@ namespace DiskSpaceMeter
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            MainWindowContext context = new MainWindowContext();
-            MainWindow window = new MainWindow(context);
+            IServiceCollection services = new ServiceCollection();
+
+            services.AddSingleton<MainWindowContext>();
+            services.AddSingleton<MainWindow>();
+
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
+
+            MainWindow window = serviceProvider.GetService<MainWindow>();
             window.Show();
         }
     }
