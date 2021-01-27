@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiskSpaceMeter.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,10 @@ namespace DiskSpaceMeter.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainWindowContext context)
         {
             InitializeComponent();
+            DataContext = context;
         }
     }
 }

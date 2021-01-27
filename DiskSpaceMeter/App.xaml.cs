@@ -1,4 +1,5 @@
 ﻿using DiskSpaceMeter.View;
+using DiskSpaceMeter.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,7 +17,8 @@ namespace DiskSpaceMeter
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            MainWindow window = new MainWindow();
+            MainWindowContext context = new MainWindowContext();
+            MainWindow window = new MainWindow(context);
             window.Show();
         }
     }
